@@ -34,8 +34,8 @@ An assembly file may contain:
 
 The syntax and semantics of all **instructions** and **directives** are described in detail in the following documents:
 
-* [instructions.md](docs/instructions.md) — Supported instruction set and operand formats
-* [directives.md](docs/directives.md) — Supported assembler directives and their behavior
+* [instructions.md](instructions.md) — Supported instruction set and operand formats
+* [directives.md](directives.md) — Supported assembler directives and their behavior
 
 ---
 
