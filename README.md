@@ -146,10 +146,14 @@ Unlike large toolchains such as GCC, Short Chain’s components are small enough
 ## Documentation
 
 More details about the instruction set, memory layout, and CPU architecture can be found in the [docs/](docs/) directory:
+* [Assembler](docs/assembler.md)
+  * [Assembler instructions](docs/instructions.md)
+  * [Assembler directives](docs/directives.md)
+* [Object file format](docs/shelf.md)
+* [Linker](docs/linker.md)
+* [Emulator](docs/emulator.md)
+  * [Architecture Overview](docs/architecture.md)
 
-* [Instruction Set](docs/instructions.md)
-* [Architecture Overview](docs/architecture.md)
-* [Example Programs](docs/examples.md)
 
 ---
 
