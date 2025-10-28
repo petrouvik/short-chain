@@ -137,7 +137,7 @@ It’s a minimal, readable, and fully functional example of a real toolchain —
 
 Unlike large toolchains such as GCC, Short Chain’s components are small enough to study in full, making it easy to understand how:
 
-* Assembly is translated into machine code
+* Assembly is translated into machine code and how the object files are constructed
 * Symbols and relocations are resolved by the linker
 * Instructions are fetched and executed in an emulated CPU
 
