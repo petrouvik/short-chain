@@ -1,13 +1,12 @@
-# Instruction Set
+# Assembler instruction set
 
-This document describes the instruction set used by the **ShortChain toolchain**.
-
+This document lists available instructions that the assembler can recognize and encode.
 Each entry below lists the **instruction format** and its **effect** in pseudo-code.
 
 ---
 
 | Mnemonic  | Format                      | Description                                                                                                         |
-| --------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+|-----------|-----------------------------|-------------------------------------------------------------------------------------------------------------------- |
 | **halt**  | `halt`                      | Stops program execution.                                                                                            |
 | **int**   | `int`                       | Triggers a software interrupt.                                                                                      |
 | **iret**  | `iret`                      | Pops `pc` and `status` from the stack (returns from interrupt).                                                     |
