@@ -85,13 +85,13 @@ For more information about available options, run:
 The linker combines one or more object files into an executable binary.
 
 ```bash
-./out/linker program.o other.o -hex -o executable -place=text@0x40000000
+./out/linker program.o other.o -hex -o executable.hex -place=text@0x40000000
 ```
 
 Output:
 
-* `executable` — binary executable file used by the emulator
-* `executable.txt` — human-readable representation of the linked binary
+* `executable.hex` — binary executable file used by the emulator
+* `executable.hex.txt` — human-readable representation of the linked binary
 
 For more information about available options, run:
 
@@ -106,7 +106,7 @@ For more information about available options, run:
 The emulator executes the linked binary file:
 
 ```bash
-./out/emulator executable
+./out/emulator executable.hex
 ```
 
 For more information about available options, run:
