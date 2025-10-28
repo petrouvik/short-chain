@@ -31,8 +31,7 @@ void Emulator::printRegisters(){
 void Emulator::readFile(const std::string& filename){
     std::ifstream in(filename, std::ios::binary);
     if (!in) {
-        std::cerr << "Cannot open file: " << filename << "\n";
-        return;
+        throw std::runtime_error("Cannot open file: " + filename);
     }
     while (true) {
         uint32_t address;
@@ -570,13 +569,42 @@ void Emulator::terminal(){
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     fcntl(STDIN_FILENO, F_SETFL, oldf);
 }
-
+void printUsage(const char* progName) {
+    std::cout << "Usage: " << progName << " <file>\n\n";
+    std::cout << "Options:\n";
+    std::cout << "  -h   Show this help message and exit\n\n";
+    std::cout << "Example:\n";
+    std::cout << "  " << progName << " program.hex\n\n";
+}
 int main(int argc, char **argv){
     if (argc != 2) {
+        printUsage(argv[0]);
         return 1;
     }
-    const std::string filename = argv[1];
+
+    std::string arg = argv[1];
+    if (arg == "-h") {
+        printUsage(argv[0]);
+        return 0;
+    }
+
+    const std::string filename = arg;
+
     Emulator emulator;
-    emulator.readFile(filename);
-    emulator.emulate();
+
+    try {
+        emulator.readFile(filename);
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Error reading file " << filename << ": " << e.what() << "\n";
+        return 1;
+    }
+
+    try {
+        emulator.emulate();
+    } catch (const std::runtime_error& e) {
+        std::cerr << "Emulation error: " << e.what() << "\n";
+        return 1;
+    }
+
+    return 0;
 }

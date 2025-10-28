@@ -467,13 +467,29 @@ storeOperand:
 
 %%
 
+void printUsage(const char* progName) {
+    std::cout << "Usage: " << progName << " <input_file> -o <output_file>\n";
+    std::cout << "\n";
+    std::cout << "Options:\n";
+    std::cout << "  -h             Show this help message and exit.\n";
+    std::cout << "  -o <file>      Specify the output object file.\n";
+    std::cout << "\n";
+    std::cout << "Example:\n";
+    std::cout << "  " << progName << " program.s -o program.o\n";
+    std::cout << "\n";
+}
+
 int main(int argc, char **argv) {
     std::string inputFile;
     std::string outputFile;
 
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
-        if (arg == "-o") {
+        if (arg == "-h") {
+            printUsage(argv[0]);
+            return 0;
+
+        } else if (arg == "-o") {
             if (i + 1 >= argc) {
                 std::cerr << "Error: -o requires a filename\n";
                 return 1;
@@ -486,10 +502,12 @@ int main(int argc, char **argv) {
 
     if (inputFile.empty()) {
         std::cerr << "Error: No input file specified\n";
+        printUsage(argv[0]);
         return 1;
     }
     if (outputFile.empty()) {
         std::cerr << "Error: -o option is required\n";
+        printUsage(argv[0]);
         return 1;
     }
 

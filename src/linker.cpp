@@ -563,6 +563,26 @@ void Linker::generateWriterRelocations() {
         }
     }
 }
+
+void printUsage(const char* progName) {
+    std::cout << "\nUsage: " << progName << " [options] <object_files>\n\n";
+    std::cout << "Options:\n";
+    std::cout << "  -h                   Show this help message and exit.\n";
+    std::cout << "  -o <file>            Specify output file.\n";
+    std::cout << "  -hex                 Generate final hex output - input to the emulator.\n";
+    std::cout << "  -relocatable         Generate relocatable output, which can be used as an input file for the linker.\n";
+    std::cout << "  -place=SECTION@ADDR  Specify start address for a section.\n\n";
+    std::cout << "Examples:\n";
+    std::cout << "  " << progName << " file1.o file2.o -o program.hex -hex -place=text@0x40000000 -place=data@0\n";
+    std::cout << "  " << progName << " file1.o file2.o -o program.o -relocatable\n";
+    std::cout << "\n";
+    std::cout << "Notes:\n";
+    std::cout << "  " << "-Either the -hex or the -relocatable option MUST be specified, but not both.\n";
+    std::cout << "  " << "-If the -relocatable option is used, but the user provides -place option(s), then -place option(s) will be ignored.\n";
+    std::cout << "  " << "-The emulator's program counter always starts from the same address, and that address is 0x40000000. That is why it is recommended (but not necessary) to place the main code section at that address using the -place option.\n";
+    std::cout << "\n";
+}
+
 int main(int argc, char** argv){
     Linker linker;
     std::string outputFile;
@@ -573,16 +593,20 @@ int main(int argc, char** argv){
 
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
-
-        if (arg == "-hex") {
+        if (arg == "-h") {
+            printUsage(argv[0]);
+            return 0;
+        } else if (arg == "-hex") {
             if (relocatableMode) {
                 std::cerr << "Cannot specify both -hex and -relocatable\n";
+                printUsage(argv[0]);
                 return 1;
             }
             hexMode = true;
         } else if (arg == "-relocatable") {
             if (hexMode) {
                 std::cerr << "Cannot specify both -hex and -relocatable\n";
+                printUsage(argv[0]);
                 return 1;
             }
             relocatableMode = true;
@@ -597,6 +621,7 @@ int main(int argc, char** argv){
             auto atPos = opt.find('@');
             if (atPos == std::string::npos) {
                 std::cerr << "Invalid -place format, expected section@address\n";
+                printUsage(argv[0]);
                 return 1;
             }
             std::string sectionName = opt.substr(0, atPos);
@@ -615,11 +640,13 @@ int main(int argc, char** argv){
 
     if (outputFile.empty()) {
         std::cerr << "Output file not specified\n";
+        printUsage(argv[0]);
         return 1;
     }
 
     if (!hexMode && !relocatableMode) {
         std::cerr << "Must specify either -hex or -relocatable\n";
+        printUsage(argv[0]);
         return 1;
     }
 
