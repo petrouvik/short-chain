@@ -96,7 +96,7 @@ Expressions may contain an arbitrary number of **literals** and/or **symbols**.
 
 Supported operators are binary `+` and `-`, and unary `-`. Parentheses can also be used.
 
-The result of the expression must be known during assembly - if there is a non-absolute symbol in the expression (a symbol which isn't defined through `.egu`), then
+The result of the expression must be known during assembly - if there is a non-absolute symbol in the expression (a symbol which isn't defined through `.equ`), then
 it must cancel out with a symbol from the same section, otherwise the assembler will see this as an error.
 * **Parameters:**
 
