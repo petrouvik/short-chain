@@ -64,7 +64,7 @@ $(LINK_EXEC): $(LINK_OBJS)
 EMUL_OBJS = $(OUT_DIR)/emulator.o
 
 $(EMUL_EXEC): $(EMUL_OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(EMUL_OBJS) -pthread
+	$(CXX) $(CXXFLAGS) -o $@ $(EMUL_OBJS) -lpthread
 # Clean
 clean:
 	rm -f $(OUT_DIR)/*.o $(OUT_DIR)/lexer.cpp $(OUT_DIR)/parser.cpp $(OUT_DIR)/parser.hpp $(ASM_EXEC) $(LINK_EXEC) ${EMUL_EXEC}
