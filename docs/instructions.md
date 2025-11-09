@@ -117,12 +117,12 @@ All 4-byte instructions share the same basic layout:
 
 In memory, these fields are packed into four bytes as follows:
 
-| Byte | Contents     |                    |
-| ---- | ------------ | ------------------ |
-| 0    | `(oc << 4)   | mod`               |
-| 1    | `(a << 4)    | b`                 |
-| 2    | `(c << 4)    | ((d >> 8) & 0x0F)` |
-| 3    | `(d & 0xFF)` |                    |
+| Byte | Contents                           |
+| ---- | -----------------------------------|
+| 0    | `(oc << 4) \| mod`                 |
+| 1    | `(a << 4) \| b`                    |
+| 2    | `(c << 4) \| ((d >> 8) & 0x0F)`    |
+| 3    | `(d & 0xFF)`                       |
 
 The displacement (`d`) is a signed 12-bit value, meaning it can range from **−2048 to +2047**.
 Values outside this range cause an assembly-time error.
