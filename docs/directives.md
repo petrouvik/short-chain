@@ -36,11 +36,10 @@ Declares one or more symbols as external — meaning they are defined in another
 Starts a new assembly section. The previously active section is automatically closed.
 Each section can have an arbitrary name provided as the directive parameter.
 
-* **Common sections:** `.text`, `.data`, `.bss`, or custom names.
 * **Example:**
 
   ```asm
-  .section .data
+  .section text
   ```
 
 ---
@@ -97,7 +96,7 @@ Expressions may contain an arbitrary number of **literals** and/or **symbols**.
 Supported operators are binary `+` and `-`, and unary `-`. Parentheses can also be used.
 
 The result of the expression must be known during assembly - if there is a non-absolute symbol in the expression (a symbol which isn't defined through `.equ`), then
-it must cancel out with a symbol from the same section, otherwise the assembler will see this as an error.
+it must cancel out with a symbol from the same section, otherwise the assembler will throw an error.
 * **Parameters:**
 
   * `<new_symbol>` — name of the symbol to define.
