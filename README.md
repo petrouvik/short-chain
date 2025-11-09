@@ -20,10 +20,10 @@ It is intended for learning purposes, providing a transparent and minimal exampl
 
 To build ShortChain, you need the following tools installed on your system:
 
-* **g++** (C++17 or newer)
+* **g++**
 * **flex**
 * **bison**
-* **make** (optional, but recommended)
+* **make**
 
 On Debian/Ubuntu-based systems:
 
@@ -45,7 +45,7 @@ Clone the repository and build the project using `make`:
 
 ```bash
 git clone https://github.com/petrouvik/short-chain
-cd shortchain
+cd short-chain
 make
 ```
 
